@@ -16,9 +16,8 @@ class Node():
         """
 
         if len(self.values) == 0:
-            print(f"{self.current_value} found on branch")
-
             if self.current_value == self.target:
+                print(f"{self.current_value} found valid")
                 return 0
             elif self.current_value > self.target:
                 return 1
@@ -35,39 +34,41 @@ class Node():
 
         if self.operation == "||":
             self.current_value = int(str(self.current_value) + str(self.values[0]))
-            print(self.current_value)
 
         self.values = self.values[1:]
 
-        evaluation_result = Node(
-            operation="*",
-            current_value=self.current_value,
-            target=self.target,
-            values = self.values
-        ).evaluate()
+        if self.current_value <=  self.target:
+            evaluation_result = Node(
+                operation="*",
+                current_value=self.current_value,
+                target=self.target,
+                values = self.values
+            ).evaluate()
 
-        if evaluation_result == 0:
+            if evaluation_result == 0:
+                return evaluation_result
+
+            evaluation_result = Node(
+                operation="+",
+                current_value=self.current_value,
+                target=self.target,
+                values = self.values
+            ).evaluate()
+
+            if evaluation_result == 0:
+                return evaluation_result
+
+            evaluation_result = Node(
+                operation="||",
+                current_value=self.current_value,
+                target=self.target,
+                values = self.values
+            ).evaluate()
+
+
             return evaluation_result
-
-        evaluation_result = Node(
-            operation="+",
-            current_value=self.current_value,
-            target=self.target,
-            values = self.values
-        ).evaluate()
-
-        if evaluation_result == 0:
-            return evaluation_result
-
-        evaluation_result = Node(
-            operation="||",
-            current_value=self.current_value,
-            target=self.target,
-            values = self.values
-        ).evaluate()
-
-
-        return evaluation_result
+        else:
+            return 1
 
 
 
