@@ -130,7 +130,7 @@ for line in f:
     # Try math operations
     tree= Tree(target, values)
     if tree.valid:
-        valid_stuff.append(line)
+        valid_stuff.append(f"{target}, {values}")
         valid_total += target
 
 
@@ -139,6 +139,6 @@ print("FINAL RESULTS")
 for line in valid_stuff:
     print(line)
 
-print(valid_total)
+print(f"Final answer: {valid_total}")
 
 
