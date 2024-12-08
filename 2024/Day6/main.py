@@ -1,8 +1,3 @@
-f = open("input.txt")
-data = list()
-for line in f:
-    data.append(line.rstrip())
-
 def load_map():
     f = open("input.txt")
     map = list()
